@@ -80,6 +80,49 @@ public class Block16 {
         for (int i=1;i<=a;i++) res+=i;
         System.out.println(res);
     }
+    static void nextEdge()
+    {
+        System.out.println("Задание 8");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите одну сторону треугольника");
+        int a = sc.nextInt();
+        System.out.println("Введите другую сторону треугольника");
+        int b = sc.nextInt();
+        System.out.println("Максимальное значение третьего ребра треугольника: "+(a+b-1));
+    }
+    static void sumOfCubes() {
+        System.out.println("Задание 9");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите количество чисел в массиве");
+        int n = sc.nextInt();
+        int[] array = new int [n];
+        int res=0;
+        for (int i=0; i < n; i++) {
+            System.out.println("Введите число "+(i+1));
+            array[i]=sc.nextInt();
+            res+=Math.pow(array[i],3);
+        }
+        System.out.println("Сумма кубов элементов массива "+res);
+    }
+    static void numbers()
+    {
+        System.out.println("Задание 10");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Какое число будем прибавлять само к себе?");
+        int a = sc.nextInt();
+        System.out.println("Сколько раз?");
+        int b = sc.nextInt();
+        System.out.println("Получившееся число делим на");
+        int c = sc.nextInt(); int d=a;
+        for (int i=1;i<=b;i++)
+        {
+            d+=a;
+            a=d;
+            System.out.println("Промежуточный результат "+i+" = "+d);
+        }
+        if (d%c==0) System.out.println("Полученное число делится на "+c);
+        else System.out.println("Полученное число не делится на "+c);
+    }
     public static void main(String[] args) {
         remainder();
         triArea();
@@ -88,6 +131,9 @@ public class Block16 {
         operation();
         ascii();
         addUpTo();
+        nextEdge();
+        sumOfCubes();
+        numbers();
     }
 }
 
