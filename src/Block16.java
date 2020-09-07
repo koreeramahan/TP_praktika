@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Block16 {
 
     static void remainder()
@@ -61,12 +62,22 @@ public class Block16 {
         else if (a/b==N) System.out.println("Числа надо разделить");
         else System.out.println("Запрашиваемое число получить нельзя");
     }
+    static void ascii()
+    {
+        System.out.println("Задание 6");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите символ для перевода его в числовое значение ASCII");
+        char c = sc.next().charAt(0);
+        System.out.println("Значение ASCII: "+(int)c);
+    }
     public static void main(String[] args) {
         remainder();
         triArea();
         animals();
         profitableGamble();
         operation();
+        ascii();
     }
 }
+
 
