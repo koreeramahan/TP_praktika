@@ -70,6 +70,16 @@ public class Block16 {
         char c = sc.next().charAt(0);
         System.out.println("Значение ASCII: "+(int)c);
     }
+    static void addUpTo()
+    {
+        System.out.println("Задание 7");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите число, а я посчитаю сумму чисел от 1 до этого числа");
+        int a = sc.nextInt();
+        int res=0;
+        for (int i=1;i<=a;i++) res+=i;
+        System.out.println(res);
+    }
     public static void main(String[] args) {
         remainder();
         triArea();
@@ -77,6 +87,7 @@ public class Block16 {
         profitableGamble();
         operation();
         ascii();
+        addUpTo();
     }
 }
 
