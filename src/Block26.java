@@ -31,7 +31,6 @@ public class Block26 {
     static void isPrefix(){}
     static void isSuffix(){}
     static void boxSeq(){}
-
     public static void main(String[] args) {
         System.out.println("Задание 1");
         Scanner sc = new Scanner(System.in);
