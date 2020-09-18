@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class Block26 {
     static void repeat(){}
-    static void differenceMaxMin(int[] array,int n){
+    static void differenceMaxMin(int[] array){
         int min=array[0]; int max=array[0];
-        for (int i=0;i<n;i++)
+        for (int i=0;i<array.length;i++)
         {
             if (min>array[i]) min=array[i];
             if (max<array[i]) max=array[i];
@@ -35,7 +35,7 @@ public class Block26 {
             System.out.println("Введите число "+(i+1));
             array[i]=sc.nextInt();
         }
-        differenceMaxMin(array,n);
+        differenceMaxMin(array);
     }
 }
 

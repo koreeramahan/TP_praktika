@@ -40,9 +40,9 @@ public class Block16 {
     {
         System.out.println("Максимальное значение третьего ребра треугольника: "+(a+b-1));
     }
-    static void sumOfCubes(int[] array,int n) {
+    static void sumOfCubes(int[] array) {
         int res=0;
-        for (int i=0; i < n; i++)
+        for (int i=0; i < array.length; i++)
             res+=Math.pow(array[i],3);
         System.out.println("Сумма кубов элементов массива "+res);
     }
@@ -126,7 +126,7 @@ public class Block16 {
             System.out.println("Введите число "+(i+1));
             array[i]=sc.nextInt();
         }
-        sumOfCubes(array,n);
+        sumOfCubes(array);
         /////////////////////////////////////
         System.out.println("Задание 10");
         System.out.println("Какое число будем прибавлять само к себе?");
