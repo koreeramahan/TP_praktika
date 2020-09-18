@@ -1,7 +1,12 @@
 import java.util.Scanner;
 
 public class Block26 {
-    static void repeat(){}
+    static void repeat(char[] chars,int k){
+        for (int i = 0; i < chars.length; i++) {
+            for (int j=0; j<k; j++) System.out.print(chars[i]);
+        }
+        System.out.println();
+    }
     static void differenceMaxMin(int[] array){
         int min=array[0]; int max=array[0];
         for (int i=0;i<array.length;i++)
@@ -34,9 +39,21 @@ public class Block26 {
             array1[i]=sum;
             System.out.print(array1[i] + " ");
         }
+        System.out.println();
     }
-    static void getDecimalPlaces() {}
-    static void fibonacci(){}
+    //static void getDecimalPlaces(String str) {
+        //String[] num = str.split(".");
+        //System.out.println("Количество символов после точки: ");
+    //}
+    static void fibonacci(int n){
+        int[] arr = new int[n];
+        for (int i = 0; i <n; i++) {
+            if (i==0) arr[0]=1;
+            else if (i==1) arr[1]=2;
+            else arr[i] = arr[i - 1] + arr[i - 2];
+        }
+        System.out.println("Соответствующее число Фибоначчи: "+arr[n-1]);
+    }
     static void isValid(){}
     static void isStrangePair(){}
     static void isPrefix(){}
@@ -46,6 +63,12 @@ public class Block26 {
     public static void main(String[] args) {
         System.out.println("Задание 1");
         Scanner sc = new Scanner(System.in);
+        System.out.println("Введите строку символов: ");
+        String line = sc.next();
+        char[] chars = line.toCharArray();
+        System.out.println("Сколько раз повторить каждый символ? ");
+        int k = sc.nextInt();
+        repeat(chars,k);
         /////////////////////////////////////
         System.out.println("Задание 2");
         System.out.println("Введите количество чисел в массиве");
@@ -76,6 +99,16 @@ public class Block26 {
             array3[i]=sc.nextInt();
         }
         cumulativeSum(array3);
+        /////////////////////////////////////
+        //System.out.println("Задание 5");
+        //System.out.println("Введите вещественное число, разделенное точкой");
+        //String str = sc.next();
+        //getDecimalPlaces(str);
+        /////////////////////////////////////
+        System.out.println("Задание 6");
+        System.out.println("Числа Фибоначчи. Введите число: ");
+        int n6 = sc.nextInt();
+        fibonacci(n6);
     }
 }
 
