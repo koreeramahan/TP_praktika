@@ -13,7 +13,16 @@ public class Block26 {
         System.out.println("Наибольшее значение: "+max);
         System.out.println("Разница между max и min значениями: " + (max-min));
     }
-    static void isAvgWhole(){}
+    static void isAvgWhole(int[] array){
+        boolean res; double sum=0;
+        for (int i=0;i<array.length;i++)
+            sum+=array[i];
+        double avg=sum/array.length;
+        System.out.println("Среднее значение: "+avg);
+        if (avg==(int)avg) res=true;
+        else res=false;
+        System.out.println("Среднее значение чисел массива имеет целое значение: "+res);
+    }
     static void cumulativeSum() {}
     static void getDecimalPlaces() {}
     static void fibonacci(){}
@@ -36,6 +45,16 @@ public class Block26 {
             array[i]=sc.nextInt();
         }
         differenceMaxMin(array);
+        /////////////////////////////////////
+        System.out.println("Задание 3");
+        System.out.println("Введите количество чисел в массиве");
+        int n2 = sc.nextInt();
+        int[] array2 = new int [n2];
+        for (int i=0; i < n2; i++) {
+            System.out.println("Введите число "+(i+1));
+            array2[i]=sc.nextInt();
+        }
+        isAvgWhole(array2);
     }
 }
 
