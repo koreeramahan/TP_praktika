@@ -91,7 +91,7 @@ public class Block16 {
         System.out.println("Введите pay");
         double c4 = sc.nextDouble();
         profitableGamble(a4,b4,c4);
-        /////////////////////////////////////
+        //////////////////////////////////////
         System.out.println("Задание 5");
         System.out.println("Введите число, которое нужно получить");
         double N = sc.nextDouble();
