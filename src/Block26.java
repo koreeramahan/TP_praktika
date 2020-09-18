@@ -23,7 +23,18 @@ public class Block26 {
         else res=false;
         System.out.println("Среднее значение чисел массива имеет целое значение: "+res);
     }
-    static void cumulativeSum() {}
+    static void cumulativeSum(int[] array) {
+        int n=array.length;
+        int[] array1 = new int[n];
+        System.out.println("Новый массив по принципу элемент+сумма предыдущих цифр:");
+        int sum=0;
+        for (int i=0; i<array.length;i++)
+        {
+            sum+=array[i];
+            array1[i]=sum;
+            System.out.print(array1[i] + " ");
+        }
+    }
     static void getDecimalPlaces() {}
     static void fibonacci(){}
     static void isValid(){}
@@ -55,6 +66,16 @@ public class Block26 {
             array2[i]=sc.nextInt();
         }
         isAvgWhole(array2);
+        /////////////////////////////////////
+        System.out.println("Задание 4");
+        System.out.println("Введите количество чисел в массиве");
+        int n3 = sc.nextInt();
+        int[] array3 = new int [n3];
+        for (int i=0; i < n3; i++) {
+            System.out.println("Введите число "+(i+1));
+            array3[i]=sc.nextInt();
+        }
+        cumulativeSum(array3);
     }
 }
 
