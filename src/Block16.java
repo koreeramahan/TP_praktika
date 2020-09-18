@@ -58,6 +58,7 @@ public class Block16 {
         if (d%c==0) System.out.println("Полученное число делится на "+c);
         else System.out.println("Полученное число не делится на "+c);
     }
+
     public static void main(String[] args) {
         System.out.println("Задание 1");
         Scanner sc = new Scanner(System.in);
