@@ -41,10 +41,13 @@ public class Block26 {
         }
         System.out.println();
     }
-    //static void getDecimalPlaces(String str) {
-        //String[] num = str.split(".");
-        //System.out.println("Количество символов после точки: ");
-    //}
+    static void getDecimalPlaces(String str) {
+        double x=Double.valueOf(str);
+        if (x%1==0)
+            System.out.println("Количество символов после точки: 0");
+        else
+            System.out.println("Количество символов после точки: " + str.split("\\.")[1].length());
+    }
     static void fibonacci(int n){
         int[] arr = new int[n];
         for (int i = 0; i <n; i++) {
@@ -100,10 +103,10 @@ public class Block26 {
         }
         cumulativeSum(array3);
         /////////////////////////////////////
-        //System.out.println("Задание 5");
-        //System.out.println("Введите вещественное число, разделенное точкой");
-        //String str = sc.next();
-        //getDecimalPlaces(str);
+        System.out.println("Задание 5");
+        System.out.println("Введите вещественное число, разделенное точкой");
+        String str = sc.next();
+        getDecimalPlaces(str);
         /////////////////////////////////////
         System.out.println("Задание 6");
         System.out.println("Числа Фибоначчи. Введите число: ");
