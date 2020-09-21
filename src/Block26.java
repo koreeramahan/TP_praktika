@@ -58,10 +58,26 @@ public class Block26 {
         System.out.println("Соответствующее число Фибоначчи: "+arr[n-1]);
     }
     static void isValid(){}
-    static void isStrangePair(){}
+    static void isStrangePair(String w1, String w2){
+        if ((w1.charAt(0) == w2.charAt((w2.length()-1)))
+            && (w2.charAt(0) == w1.charAt((w1.length()-1))))
+                System.out.println("Данные слова образуют странную пару");
+        else System.out.println("Данные слова НЕ образуют странную пару");
+    }
     static void isPrefix(){}
     static void isSuffix(){}
-    static void boxSeq(){}
+    static void boxSeq(int h){
+        int sum=0;
+        for (int i=0; i<=h; i++)
+        {
+            if (i==0) sum=0;
+            else {
+                if (i % 2 != 0) sum += 3;
+                else sum -= 1;
+            }
+        }
+        System.out.println("Количество полей: " + sum);
+    }
 
     public static void main(String[] args) {
         System.out.println("Задание 1");
@@ -112,6 +128,22 @@ public class Block26 {
         System.out.println("Числа Фибоначчи. Введите число: ");
         int n6 = sc.nextInt();
         fibonacci(n6);
+        /////////////////////////////////////
+        System.out.println("Задание 7");
+        /////////////////////////////////////
+        System.out.println("Задание 8. Образуют ли слова странную пару?");
+        System.out.println("Введите первое слово: ");
+        String w1 = sc.next();
+        System.out.println("Введите второе слово: ");
+        String w2 = sc.next();
+        isStrangePair(w1,w2);
+        /////////////////////////////////////
+        System.out.println("Задание 9");
+        /////////////////////////////////////
+        System.out.println("Задание 10");
+        System.out.println("Введите шаг: ");
+        int h = sc.nextInt();
+        boxSeq(h);
     }
 }
 
