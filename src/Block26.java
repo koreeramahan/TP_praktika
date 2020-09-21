@@ -57,7 +57,19 @@ public class Block26 {
         }
         System.out.println("Соответствующее число Фибоначчи: "+arr[n-1]);
     }
-    static void isValid(){}
+    static void isValid(String str){
+        char[] charm = str.toCharArray();
+        boolean res=true;
+        for (int i=0; i<charm.length; i++) {
+            if (Character.isDigit(charm[i])==false)
+            {
+                res=false;
+                break;
+            }
+        }
+        if (charm.length!=5) res=false;
+        System.out.println("Почтовый индекс " + res);
+    }
     static void isStrangePair(String w1, String w2){
         if ((w1.charAt(0) == w2.charAt((w2.length()-1)))
             && (w2.charAt(0) == w1.charAt((w1.length()-1))))
@@ -130,6 +142,9 @@ public class Block26 {
         fibonacci(n6);
         /////////////////////////////////////
         System.out.println("Задание 7");
+        System.out.println("Введите почтовый индекс: ");
+        String str1 = sc.next();
+        isValid(str1);
         /////////////////////////////////////
         System.out.println("Задание 8. Образуют ли слова странную пару?");
         System.out.println("Введите первое слово: ");
