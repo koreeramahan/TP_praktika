@@ -76,8 +76,29 @@ public class Block26 {
                 System.out.println("Данные слова образуют странную пару");
         else System.out.println("Данные слова НЕ образуют странную пару");
     }
-    static void isPrefix(){}
-    static void isSuffix(){}
+    static void isPrefix(String word, String fix){
+        boolean res = true;
+        String sub_str = fix.substring(0,fix.length()-2);
+        for (int i = 0; i < sub_str.length(); i++) {
+            if (sub_str.charAt(i) != word.charAt(i)) {
+                res = false;
+                break;
+            }
+        }
+        System.out.println("Префикс: " + res);
+    }
+    static void isSuffix(String word, String fix){
+        boolean res = true;
+        String sub_str = fix.substring(1,fix.length());
+        int j = sub_str.length()-1;
+        for (int i = word.length()-1; i > sub_str.length(); i--)
+        {
+            if (j < 0) res=true;
+            if (sub_str.charAt(j) != word.charAt(i)) res = false;
+            j--;
+        }
+        System.out.println("Суффикс: " + res);
+    }
     static void boxSeq(int h){
         int sum=0;
         for (int i=0; i<=h; i++)
@@ -153,7 +174,16 @@ public class Block26 {
         String w2 = sc.next();
         isStrangePair(w1,w2);
         /////////////////////////////////////
-        System.out.println("Задание 9");
+        System.out.println("Задание 9. Суффикс или префикс");
+        System.out.println("Введите слово: ");
+        String word = sc.next();
+        System.out.println("Введите суффикс(начинается с -) или префикс(кончается -): ");
+        String fix = sc.next();
+        if (fix.charAt(0) == '-')
+            isSuffix(word,fix);
+        else if (fix.charAt(fix.length()-1) == '-')
+            isPrefix(word,fix);
+        else System.out.println("Суффикс или префикс не введены");
         /////////////////////////////////////
         System.out.println("Задание 10");
         System.out.println("Введите шаг: ");
