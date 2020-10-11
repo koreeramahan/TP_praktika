@@ -11,11 +11,9 @@ public class Block36 {
     }
     static void findZip (String str)
     {
-        int res=-1;
         int index = str.indexOf("zip");
-        if (index == -1 || index == str.length() - 1) res = -1;
-        res = str.indexOf("zip", index + 1);
-        System.out.println(res);
+        if (index == -1 || index == str.length() - 1) System.out.println("-1");
+        System.out.println(str.indexOf("zip", index + 1));
     }
     public static void main(String[] args) {
         System.out.println("Задание 1");
