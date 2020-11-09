@@ -230,74 +230,86 @@ public class Block46 {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Задание 1. Сколько слов, размер строки, текст.");
-        Scanner sc = new Scanner(System.in);
+        Scanner sc1 = new Scanner(System.in);
         System.out.println("Введите количество слов и размер строки:");
-        int n = sc.nextInt();
-        int k = sc.nextInt();
+        int n = sc1.nextInt();
+        int k = sc1.nextInt();
         ArrayList<String> strArr = new ArrayList<>(n);
         System.out.println("Введите текст:");
-        for (int i = 0; i < n; i++) strArr.add(sc.next());
+        for (int i = 0; i < n; i++) strArr.add(sc1.next());
+        sc1.close();
         essay(k, strArr);
         /////////////////////////////////////
+        Scanner sc2 = new Scanner(System.in);
         System.out.println("Задание 2. Группируем строку в кластер скобок.");
         System.out.println("Введите строку:");
-        String str = sc.next();
+        String str = sc2.next();
+        sc2.close();
         split(str);
         /////////////////////////////////////
+        Scanner sc3 = new Scanner(System.in);
         System.out.println("Задание 3. Преобразование в camel или snake case.");
         System.out.println("Введите строку:");
-        String str1 = sc.next();
+        String str1 = sc3.next();
+        sc3.close();
         if (str1.indexOf('_') != -1) toCamelCase(str1);
         else toSnakeCase(str1);
         /////////////////////////////////////
+        Scanner sc4 = new Scanner(System.in);
         System.out.println("Задание 4. Оплата сверхурочной работы.");
         System.out.println("Введите 4 значения:");
-        double start = sc.nextDouble();
-        double finish = sc.nextDouble();
-        double rate = sc.nextDouble();
-        double m = sc.nextDouble();
+        double start = sc4.nextDouble();
+        double finish = sc4.nextDouble();
+        double rate = sc4.nextDouble();
+        double m = sc4.nextDouble();
+        sc4.close();
         overTime(start, finish, rate, m);
         /////////////////////////////////////
+        Scanner sc5 = new Scanner(System.in);
         System.out.println("Задание 5. Считаем ИМТ.");
         System.out.println("Введите рост и вес:");
-        String h = sc.next();
-        String w = sc.next();
+        String h = sc5.nextLine();
+        String w = sc5.nextLine();
+        sc5.close();
         BMI(h, w);
         /////////////////////////////////////
+        Scanner sc6 = new Scanner(System.in);
         System.out.println("Задание 6. Перемножать цифры числа, пока не останется одна цифра.");
         System.out.println("Введите число:");
-        int x = sc.nextInt();
+        int x = sc6.nextInt();
+        sc6.close();
         bugger(x);
         /////////////////////////////////////
+        Scanner sc7 = new Scanner(System.in);
         System.out.println("Задание 7. Звездная стенография, символ повторяется *n раз.");
         System.out.println("Введите строку:");
-        String str3 = sc.next();
+        String str3 = sc7.next();
+        sc7.close();
         toStarShorthand(str3);
-        sc.close();
         /////////////////////////////////////
-        Scanner sc1 = new Scanner(System.in);
+        Scanner sc8 = new Scanner(System.in);
         System.out.println("Задание 8. Последнее слово содержит одни и те же гласные, значит строки рифмуются.");
         System.out.println("Введите две строки:");
-        String str4 = sc1.next();
-        String str5 = sc1.next();
+        String str4 = sc8.next();
+        String str5 = sc8.next();
+        sc8.close();
         doesRhyme(str4, str5);
-        sc1.close();
         /////////////////////////////////////
-        Scanner sc2 = new Scanner(System.in);
+        Scanner sc9 = new Scanner(System.in);
         System.out.println("Задание 9. В первом числе надо 3 повтора, во втором 2 повтора.");
         System.out.println("Введите два числа:");
-        int y = sc2.nextInt();
-        int z = sc2.nextInt();
+        int y = sc9.nextInt();
+        int z = sc9.nextInt();
+        sc9.close();
         trouble(y,z);
-        sc2.close();
         /////////////////////////////////////
-        Scanner sc3 = new Scanner(System.in);
+        Scanner sc10 = new Scanner(System.in);
         System.out.println("Задание 10. Число уникальных книг.");
         System.out.println("Введите последовательность символов и символ, обозначающий начало/конец книги:");
-        String str6 = sc3.next();
+        String str6 = sc10.next();
         char c = (char) System.in.read();
+        sc10.close();
         countUniqueBooks(str6, c);
-        sc3.close();
     }
 
 }
