@@ -77,14 +77,35 @@ public class Block46 {
 
     public static void overTime(double start, double finish, double rate, double m)
     {
-        double earned;
-        if (start<17 && finish<=17)
-            earned = (finish-start)*rate;
-        else if (start >= 17 && finish > 17) earned = (finish-start)*rate*m;
-        else earned = ((17 - start)+(finish - 17)*m)*rate;
-        int dollars = (int)earned;
-        double cents = Math.round((earned%1)*100);
-        System.out.println("$" + dollars + String.format("%.2f", cents));
+        double reg = 0;
+        double over = 0;
+
+        if (start<9 && finish<9) over = finish - start;
+        else if (start<9 && finish>=9 && finish<=17)
+        {
+            over = 9-start;
+            reg = finish-9;
+        }
+        else if (start<9 && finish>17)
+        {
+            over = 9-start+finish-17;
+            reg = 9+17;
+        }
+        else if (start>=9 && start<=17 && finish>=9 && finish<=17)
+        {
+            reg = finish - start;
+        }
+        else if (start>=9 && start<=17 && finish>17)
+        {
+            reg = 17-start;
+            over = finish-17;
+        }
+        else
+        {
+            over = finish-start;
+        }
+        System.out.println("$" + String.format("%.2f", reg*rate + over*rate*m));
+
     }
 
     public static void BMI(String height, String weight)
