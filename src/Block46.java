@@ -1,26 +1,26 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.HashSet;
 
 public class Block46 {
 
     static void essay(int k, ArrayList<String> strArr){
-        String res = "";
+        StringBuilder res = new StringBuilder();
         int count = k;
-        Iterator<String> it = strArr.iterator();
-        String val = it.next();
-        res += val + " ";
+        Iterator<String> iter = strArr.iterator();
+        String val = iter.next();
+        res.append(val).append(" ");
         count -= val.length();
-        while (it.hasNext())
+        while (iter.hasNext())
         {
-            val = it.next();
+            val = iter.next();
             if (count < val.length())
             {
-                res += '\n';
+                res.append('\n');
                 count = k;
             }
-            res += val + " ";
+            res.append(val).append(" ");
             count -= val.length();
         }
         System.out.println(res);
@@ -28,96 +28,90 @@ public class Block46 {
 
     public static void split(String str)
     {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         int count = 0;
         for (int i = 0; i < str.length(); i++)
         {
             char ch = str.charAt(i);
-            res += ch;
+            res.append(ch);
             if (ch == '(') count++;
             else count--;
-            if (count == 0) res += ' ';
+            if (count == 0) res.append(' ');
         }
         System.out.println(res);
     }
 
     public static void toCamelCase(String str)
     {
-        String res = "";
-        boolean newWord = false;
+        StringBuilder res = new StringBuilder();
+        boolean n = false;
         for (int i = 0; i < str.length(); i++)
         {
             char ch = str.charAt(i);
-            if (ch == '_') newWord = true;
-            else if (newWord)
+            if (ch == '_') n = true;
+            else if (n)
             {
-                newWord = false;
-                res += (char)(ch-32);
+                n = false;
+                res.append((char)(ch-32));
             }
-            else res += ch;
+            else res.append(ch);
         }
         System.out.println(res);
     }
 
     public static void toSnakeCase(String str)
     {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (int i = 0; i < str.length(); i++)
         {
             char ch = str.charAt(i);
-            if (ch >= 'A' && ch <= 'Z')
+            if (ch>='A' && ch<='Z')
             {
-                res += '_';
-                res += (char)(ch+32);
+                res.append('_');
+                res.append((char)(ch+32));
             }
-            else res += ch;
+            else res.append(ch);
         }
         System.out.println(res);
     }
 
-    public static void overTime(double start, double finish, double rate, double mult)
+    public static void overTime(double start, double finish, double rate, double m)
     {
-        double reg = 0;
-        double over = 0;
-        final int G_START = 9;
-        final int G_FINISH = 17;
-        if (start < G_START && finish < G_START) over = finish - start;
-        else if (start < G_START && finish >= G_START && finish <= G_FINISH)
-        {
-            over = G_START - start;
-            reg = finish - G_START;
-        }
-        else if (start < G_START && finish > G_FINISH)
-        {
-            over = G_START - start + finish - G_FINISH;
-            reg = G_START + G_FINISH;
-        }
-        else if (start >= G_START && start <= G_FINISH && finish >= G_START && finish <= G_FINISH)
-        reg = finish - start;
-        else if (start >= G_START && start <= G_FINISH && finish > G_FINISH)
-        {
-            reg = G_FINISH - start;
-            over = finish - G_FINISH;
-        }
-        else over = finish - start;
-        System.out.println("$" + String.format("%.2f", reg*rate + over*rate*mult));
+        double earned;
+        if (start<17 && finish<=17)
+            earned = (finish-start)*rate;
+        else if (start >= 17 && finish > 17) earned = (finish-start)*rate*m;
+        else earned = ((17 - start)+(finish - 17)*m)*rate;
+        int dollars = (int)earned;
+        double cents = Math.round((earned%1)*100);
+        System.out.println("$" + dollars + String.format("%.2f", cents));
     }
 
-    public static void BMI(double w, double h)
+    public static void BMI(String height, String weight)
     {
-        double val = w / (h*h);
-        String res = String.format("%.1f", val);
-        if (val < 18.5) res += " Underweight";
-        else if (val >= 18.5 && val < 25) res += " Normal weight";
-        else res += " Overweight";
-        System.out.println(res);
+        double w = Double.parseDouble(weight.split(" ")[0]);
+        if (weight.endsWith("pounds"))
+            w *= 0.45359237;
+        double h = Double.parseDouble(height.split(" ")[0]);
+        if (height.endsWith("inches"))
+            h *= 0.0254;
+        double index = w/(h*h);
+        index = Math.round(index * 10)/10.0;
+        String category;
+        if (index < 18.5)
+            category = "Underweight";
+        else if (index < 25)
+            category = "Normal weight";
+        else category = "Overweight";
+        System.out.println(index+" "+category);
+
     }
 
     public static void bugger(int n)
     {
         int count = 0;
         String str = Integer.toString(n);
-        while (str.length() > 1)
+        while (str.length()>1)
         {
             count++;
             int val = 1;
@@ -130,7 +124,7 @@ public class Block46 {
 
     public static void toStarShorthand(String str)
     {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         int count = 1;
         char ch = '\0';
         for (int i = 0; i < str.length(); i++)
@@ -141,107 +135,79 @@ public class Block46 {
             {
                 if (count != 1)
                 {
-                    res += '*';
-                    res += Integer.toString(count);
+                    res.append('*');
+                    res.append(count);
                     count = 1;
                 }
-                res += newCh;
+                res.append(newCh);
                 ch = newCh;
             }
         }
         if (count != 1)
         {
-            res += '*';
-            res += Integer.toString(count);
+            res.append('*');
+            res.append(count);
         }
         System.out.println(res);
     }
 
-    public static void doesRhyme(String str1, String str2)
+    public static void doesRhyme(String a, String b)
     {
-        int index;
-        index = str1.lastIndexOf(' ');
-        if (index == -1) index = 0;
-        String word1 = str1.substring(index+1).toUpperCase();
-        index = str2.lastIndexOf(' ');
-        if (index == -1) index = 0;
-        String word2 = str2.substring(index+1).toUpperCase();
-        String check = "";
-        for (int i = 0; i < word1.length(); i++)
-        {
-            char ch = word1.charAt(i);
-            if (ch == 'E' || ch == 'Y' || ch == 'U' || ch == 'O' || ch == 'A' || ch == 'I')
-            check += ch;
-        }
-        int count = 0;
-        for (int i = 0; i < word2.length(); i++)
-        {
-            char ch = word2.charAt(i);
-            if (ch == 'E' || ch == 'Y' || ch == 'U' || ch == 'O' || ch == 'A' || ch == 'I')
-            {
-                if (count >= check.length()) System.out.println("false");
-                else if (ch != check.charAt(count)) System.out.println("false");
-                count++;
-            }
-        }
-        System.out.println("true");
+        String lastA = a.substring(a.lastIndexOf(" ") + 1).toUpperCase();
+        String lastB = b.substring(b.lastIndexOf(" ") + 1).toUpperCase();
+
+        StringBuilder vowelsA = new StringBuilder();
+        StringBuilder vowelsB = new StringBuilder();
+        for (int i = 0; i < lastA.length(); i++)
+            if ("AEIOUY".contains(lastA.substring(i, i+1)))
+                vowelsA.append(lastA.charAt(i));
+        for (int i = 0; i < lastB.length(); i++)
+            if ("AEIOUY".contains(lastB.substring(i, i+1)))
+                vowelsB.append(lastB.charAt(i));
+        System.out.println (vowelsA.toString().equals(vowelsB.toString()));
+
     }
 
     public static void trouble(int a, int b)
     {
-        String str1 = Integer.toString(a);
-        String str2 = Integer.toString(b);
-        char number = '\0';
-        int count = 0;
-        for (int i = 0; i < str1.length(); i++)
-        {
-            char ch = str1.charAt(i);
-            if (ch == number) count++;
-            else
-            {
-                number = ch;
-                count = 0;
-            }
-            if (count == 2)
-            {
-                if (str2.indexOf(String.copyValueOf(new char[] {number, number})) != -1)
-                    System.out.println("true");
-                else count = 0;
-            }
-        }
-        System.out.println("false");
+        String strA = Long.toString(a);
+        String strB = Long.toString(b);
+        boolean res=false;
+        int[] repeatsA = new int[10];
+        int[] repeatsB = new int[10];
+        for (int i = 0; i < strA.length(); i++)
+            repeatsA[Integer.parseInt(strA.substring(i, i+1))]++;
+        for (int i = 0; i < strB.length(); i++)
+            repeatsB[Integer.parseInt(strB.substring(i, i+1))]++;
+        for (int i = 0; i < 10; i++)
+                if (repeatsA[i] == 3 && repeatsB[i] == 2) res = true;
+        System.out.println (res);
     }
 
-    public static void countUniqueBooks(String str, String endChar)
+    public static void countUniqueBooks(String str, char c)
     {
-        int count = 0;
-        boolean open = false;
-        HashSet<Character> set = new HashSet<>();
+        boolean bookOpen = false;
+        StringBuilder uniqueChars = new StringBuilder();
+        String currentBook = "";
         for (int i = 0; i < str.length(); i++)
         {
-            char ch = str.charAt(i);
-            if (!open && ch == endChar.charAt(0)) open = true;
-            else if (open)
+            if (str.charAt(i) == c)
             {
-                if (ch != endChar.charAt(0))
-                {
-                    if (!set.contains(ch))
-                    {
-                        set.add(ch);
-                        count++;
-                    }
-                }
-                else
-                {
-                    open = false;
-                    set.clear();
-                }
+                if (bookOpen) uniqueChars.append(currentBook);
+                bookOpen = !bookOpen;
+            }
+            else
+            {
+                if (bookOpen)
+                    if (!uniqueChars.toString().contains(str.substring(i, i+1))
+                            && !currentBook.contains(str.substring(i, i+1)))
+                        uniqueChars.append(str.charAt(i));
             }
         }
-        System.out.println(count);
+        System.out.println(uniqueChars.length());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Задание 1");
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите количество слов и размер строки:");
@@ -268,13 +234,13 @@ public class Block46 {
         double start = sc.nextDouble();
         double finish = sc.nextDouble();
         double rate = sc.nextDouble();
-        double mult = sc.nextDouble();
-        overTime(start, finish, rate, mult);
+        double m = sc.nextDouble();
+        overTime(start, finish, rate, m);
         /////////////////////////////////////
-        System.out.println("Задание 5");
+        System.out.println("Задание 5. Считаем ИМТ");
         System.out.println("Введите рост и вес:");
-        double h = sc.nextDouble();
-        double w = sc.nextDouble();
+        String h = sc.next();
+        String w = sc.next();
         BMI(h, w);
         /////////////////////////////////////
         System.out.println("Задание 6");
@@ -289,8 +255,8 @@ public class Block46 {
         /////////////////////////////////////
         System.out.println("Задание 8");
         System.out.println("Введите две строки:");
-        String str4 = sc.nextLine();
-        String str5 = sc.nextLine();
+        String str4 = sc.next();
+        String str5 = sc.next();
         doesRhyme(str4, str5);
         /////////////////////////////////////
         System.out.println("Задание 9");
@@ -302,8 +268,8 @@ public class Block46 {
         System.out.println("Задание 10");
         System.out.println("Введите последовательность символов и символ, обозначающий начало/конец книги:");
         String str6 = sc.next();
-        String endChar = sc.next();
-        countUniqueBooks(str6, endChar);
+        char c = (char) System.in.read();
+        countUniqueBooks(str6, c);
     }
 
 }
