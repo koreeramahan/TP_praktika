@@ -108,7 +108,7 @@ public class Block46 {
 
     }
 
-    public static void BMI(String height, String weight)
+    public static void BMI(String weight, String height)
     {
         double w = Double.parseDouble(weight.split(" ")[0]);
         if (weight.endsWith("pounds"))
@@ -237,21 +237,18 @@ public class Block46 {
         ArrayList<String> strArr = new ArrayList<>(n);
         System.out.println("Введите текст:");
         for (int i = 0; i < n; i++) strArr.add(sc1.next());
-        sc1.close();
         essay(k, strArr);
         /////////////////////////////////////
         Scanner sc2 = new Scanner(System.in);
         System.out.println("Задание 2. Группируем строку в кластер скобок.");
         System.out.println("Введите строку:");
         String str = sc2.next();
-        sc2.close();
         split(str);
         /////////////////////////////////////
         Scanner sc3 = new Scanner(System.in);
         System.out.println("Задание 3. Преобразование в camel или snake case.");
         System.out.println("Введите строку:");
         String str1 = sc3.next();
-        sc3.close();
         if (str1.indexOf('_') != -1) toCamelCase(str1);
         else toSnakeCase(str1);
         /////////////////////////////////////
@@ -262,37 +259,32 @@ public class Block46 {
         double finish = sc4.nextDouble();
         double rate = sc4.nextDouble();
         double m = sc4.nextDouble();
-        sc4.close();
         overTime(start, finish, rate, m);
         /////////////////////////////////////
         Scanner sc5 = new Scanner(System.in);
         System.out.println("Задание 5. Считаем ИМТ.");
-        System.out.println("Введите рост и вес:");
-        String h = sc5.nextLine();
+        System.out.println("Введите вес, затем рост:");
         String w = sc5.nextLine();
-        sc5.close();
-        BMI(h, w);
+        String h = sc5.nextLine();
+        BMI(w, h);
         /////////////////////////////////////
         Scanner sc6 = new Scanner(System.in);
         System.out.println("Задание 6. Перемножать цифры числа, пока не останется одна цифра.");
         System.out.println("Введите число:");
         int x = sc6.nextInt();
-        sc6.close();
         bugger(x);
         /////////////////////////////////////
         Scanner sc7 = new Scanner(System.in);
         System.out.println("Задание 7. Звездная стенография, символ повторяется *n раз.");
         System.out.println("Введите строку:");
         String str3 = sc7.next();
-        sc7.close();
         toStarShorthand(str3);
         /////////////////////////////////////
         Scanner sc8 = new Scanner(System.in);
         System.out.println("Задание 8. Последнее слово содержит одни и те же гласные, значит строки рифмуются.");
         System.out.println("Введите две строки:");
-        String str4 = sc8.next();
-        String str5 = sc8.next();
-        sc8.close();
+        String str4 = sc8.nextLine();
+        String str5 = sc8.nextLine();
         doesRhyme(str4, str5);
         /////////////////////////////////////
         Scanner sc9 = new Scanner(System.in);
@@ -300,7 +292,6 @@ public class Block46 {
         System.out.println("Введите два числа:");
         int y = sc9.nextInt();
         int z = sc9.nextInt();
-        sc9.close();
         trouble(y,z);
         /////////////////////////////////////
         Scanner sc10 = new Scanner(System.in);
@@ -308,7 +299,6 @@ public class Block46 {
         System.out.println("Введите последовательность символов и символ, обозначающий начало/конец книги:");
         String str6 = sc10.next();
         char c = (char) System.in.read();
-        sc10.close();
         countUniqueBooks(str6, c);
     }
 
