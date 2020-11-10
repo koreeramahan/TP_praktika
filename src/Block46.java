@@ -189,7 +189,7 @@ public class Block46 {
 
     }
 
-    public static void trouble(int a, int b)
+    public static void trouble(long a, long b)
     {
         String strA = Long.toString(a);
         String strB = Long.toString(b);
@@ -290,8 +290,8 @@ public class Block46 {
         Scanner sc9 = new Scanner(System.in);
         System.out.println("Задание 9. В первом числе надо 3 повтора, во втором 2 повтора.");
         System.out.println("Введите два числа:");
-        int y = sc9.nextInt();
-        int z = sc9.nextInt();
+        long y = sc9.nextLong();
+        long z = sc9.nextLong();
         trouble(y,z);
         /////////////////////////////////////
         Scanner sc10 = new Scanner(System.in);
