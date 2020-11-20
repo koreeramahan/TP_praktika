@@ -259,8 +259,45 @@ public class Block56 {
 
     public static void hexLattice(int n)
     {
-        
-    }
+        int s = 1;
+        //правило центрированного шестиугольного числа 3*n*(n-1)+1
+        while(true)
+        {
+            if (3*s*(s-1)+1==n) break;
+            if (3*s*(s-1)+1>n) System.out.println("Invalid");
+            s++;
+        }
+        int lines = s*2-1;
+        String res = "";
+        //рисуем первую половину
+        for (int line=0; line<lines/2; line++)
+        {
+            String newLine = "";
+            for (int i=0; i<s-line; i++)
+                newLine += " ";
+            for (int j=0; j<s+line; j++)
+                newLine += "o ";
+            for (int i=0; i<s-line-1; i++)
+                newLine += " ";
+            newLine += "\n";
+            res += newLine;
+        }
+        //рисуем вторую половину
+        for (int line=lines/2; line<lines; line++)
+        {
+            String newLine = "";
+            for (int i=0; i<s-(lines-line)+1; i++)
+                newLine += " ";
+            for (int j = 0; j<s+(lines-line)-1; j++)
+                newLine += "o ";
+            for (int i=0; i<s-(lines-line); i++)
+                newLine += " ";
+            newLine += "\n";
+            res += newLine;
+        }
+            System.out.println(res);
+        }
+
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
         Scanner sc1 = new Scanner(System.in);
