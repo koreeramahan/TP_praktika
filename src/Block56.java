@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Block56 {
@@ -16,7 +15,7 @@ public class Block56 {
         else System.out.println("false");
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         Scanner sc3 = new Scanner(System.in);
         System.out.println("Задание 3. Последнее слово содержит одни и те же гласные, значит строки рифмуются.");
