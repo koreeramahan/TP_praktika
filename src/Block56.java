@@ -1,3 +1,4 @@
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -151,15 +152,10 @@ public class Block56 {
         System.out.println(res);
     }
 
-    public static void getSha256Hash(String hash)
-    {
-        byte[] code = null;
-        try
-        {
-            MessageDigest md = MessageDigest.getInstance("SHA-256"); //объект для преобразования в дайджест
-            code = md.digest(hash.getBytes(StandardCharsets.UTF_8)); //передем данные и создаем дайджест
-        }
-        catch(Exception e) {};
+    public static void getSha256Hash(String hash) throws NoSuchAlgorithmException {
+        byte[] code;
+        MessageDigest md = MessageDigest.getInstance("SHA-256"); //объект для преобразования в дайджест
+        code = md.digest(hash.getBytes(StandardCharsets.UTF_8)); //передем данные и создаем дайджест
         BigInteger num = new BigInteger(1, code);
         //форматируем в вид 16ной цифры
         StringBuilder res = new StringBuilder(num.toString(16));
@@ -167,7 +163,7 @@ public class Block56 {
         System.out.println(res.toString());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
 
         Scanner sc3 = new Scanner(System.in);
         System.out.println("Задание 3. Может ли быть завершена входная строка");
