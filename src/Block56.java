@@ -163,6 +163,25 @@ public class Block56 {
         System.out.println(res.toString());
     }
 
+    public static void correctTitle(String title)
+    {
+        title=title.toLowerCase();
+        //разделяем слова
+        String[] w=title.split(" ");
+        for (int i=0; i<w.length; i++)
+        {
+            //если не and the of in то пишем с заглавной буквы
+            if (!(w[i].contentEquals("and") || w[i].contentEquals("of")
+                    || w[i].contentEquals("the") || w[i].contentEquals("in")))
+            {
+                String newW=w[i].substring(0,1).toUpperCase()+w[i].substring(1);
+                w[i]=newW;
+            }
+            System.out.println(String.join(" ", w));
+        }
+    }
+
+
     public static void main(String[] args) throws NoSuchAlgorithmException {
 
         Scanner sc3 = new Scanner(System.in);
@@ -200,6 +219,12 @@ public class Block56 {
         System.out.println("Задание 8. Возвращение безопасного хэша, введите строку:");
         String hash = sc8.next();
         getSha256Hash(hash);
+        ////////////////////////////////////////
+        Scanner sc9  = new Scanner(System.in);
+        System.out.println("Задание 9. Правильная запись титула.");
+        System.out.println("Введите титул из Игры Престолов:");
+        String title = sc9.nextLine();
+        correctTitle(title);
     }
 
 }
