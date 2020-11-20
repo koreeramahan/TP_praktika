@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
+import java.math.BigInteger;
 
 public class Block56 {
 
@@ -59,31 +62,109 @@ public class Block56 {
 
     public static void validateCard(String code) {
         if (code.length()<14 || code.length()>19) System.out.println("false"); //длина карты
-        char check = code.charAt(code.length()-1); //посл цифра
-        code=code.substring(0, code.length()-1); //шаг1. убираем посл цифру из номера карты
-        code=new StringBuilder(code).reverse().toString(); //шаг2. переворачиваем
-        StringBuilder doubleCode=new StringBuilder();
-        //шаг 3. удваиваем числа на нечетных местах
-        for (int i=0; i<code.length(); i++)
-        {
-            if (i%2==0)
-            {
-                int val=Integer.parseInt(String.valueOf(code.charAt(i)))*2;
-                if (val>9) val=val/10+val%10;
-                doubleCode.append(val);
+        else {
+            char check = code.charAt(code.length() - 1); //посл цифра
+            code = code.substring(0, code.length() - 1); //шаг1. убираем посл цифру из номера карты
+            code = new StringBuilder(code).reverse().toString(); //шаг2. переворачиваем
+            StringBuilder doubleCode = new StringBuilder();
+            //шаг 3. удваиваем числа на нечетных местах
+            for (int i = 0; i < code.length(); i++) {
+                if (i % 2 == 0) {
+                    int val = Integer.parseInt(String.valueOf(code.charAt(i))) * 2;
+                    if (val > 9) val = val / 10 + val % 10;
+                    doubleCode.append(val);
+                } else doubleCode.append(code.charAt(i));
             }
-            else doubleCode.append(code.charAt(i));
+            int sum = 0;
+            //шаг 4. складываем все цифры
+            for (int i = 0; i < doubleCode.length(); i++) {
+                sum += Integer.parseInt(String.valueOf(doubleCode.charAt(i)));
+            }
+            //шаг 5. вычитаем из 10 последнюю цифру суммы
+            sum = 10 - sum % 10;
+            if (check == Integer.toString(sum).charAt(0)) System.out.println("true");
+            else System.out.println("false");
         }
-        int sum=0;
-        //шаг 4. складываем все цифры
-        for (int i=0; i<doubleCode.length(); i++)
+    }
+
+    public static void numToEng(int n)
+    {
+        if (n==0) System.out.println("zero");
+        int[] digits = {n/100,(n/10)%10,n%10};
+        String[] singleDigitNum = {"zero", "one", "two", "three", "four",
+                "five", "six", "seven", "eight", "nine"};
+        String[] ten = {"zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty",
+                "seventy", "eighty", "ninety"};
+        String[] hundred = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+                "sixteen", "seventeen", "eighteen", "nineteen"};
+        String res = "";
+        if (digits[0]>0) res+=singleDigitNum[digits[0]] + " hundred";
+        if (digits[1]==1)
         {
-            sum+=Integer.parseInt(String.valueOf(doubleCode.charAt(i)));
+            if (res.length()>0) res+=" ";
+            res+=hundred[digits[2]];
+            System.out.println(res);
         }
-        //шаг 5. вычитаем из 10 последнюю цифру суммы
-        sum=10-sum%10;
-        if (check==Integer.toString(sum).charAt(0)) System.out.println("true");
-        else System.out.println("false");
+        else if (digits[1]>1)
+        {
+            if (res.length()>0) res+=" ";
+            res+=ten[digits[1]];
+        }
+        if (digits[2]>0)
+        {
+            if (res.length()>0) res+=" ";
+            res+=singleDigitNum[digits[2]];
+        }
+        System.out.println(res);
+    }
+
+    public static void numToRus(int n)
+    {
+        if (n == 0) System.out.println("ноль");
+        int[] digits = {n/100,(n/10)%10,n%10};
+        String[] singleDigitNum = {"ноль", "один", "два", "три", "четыре",
+                "пять", "шесть", "семь", "восемь", "девять"};
+        String[] hundred = {"ноль", "сто", "двести", "триста", "четыреста",
+                "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"};
+        String[] ten = {"ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят",
+                "семьдесят", "восемьдесят", "девяносто"};
+        String[] tens = {"десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать",
+                "шестнадцать", "семьнадцать", "восемьнадцать", "девятнадцать"};
+        String res="";
+        if (digits[0]>0) res+=hundred[digits[0]];
+        if (digits[1]==1)
+        {
+            if (res.length()>0) res+=" ";
+            res+=tens[digits[2]];
+            System.out.println(res);
+        }
+        else if (digits[1]>1)
+        {
+            if (res.length()>0) res+=" ";
+            res+=ten[digits[1]];
+        }
+        if (digits[2]>0)
+        {
+            if (res.length()>0) res+=" ";
+            res+=singleDigitNum[digits[2]];
+        }
+        System.out.println(res);
+    }
+
+    public static void getSha256Hash(String hash)
+    {
+        byte[] code = null;
+        try
+        {
+            MessageDigest md = MessageDigest.getInstance("SHA-256"); //объект для преобразования в дайджест
+            code = md.digest(hash.getBytes(StandardCharsets.UTF_8)); //передем данные и создаем дайджест
+        }
+        catch(Exception e) {};
+        BigInteger num = new BigInteger(1, code);
+        //форматируем в вид 16ной цифры
+        StringBuilder res = new StringBuilder(num.toString(16));
+        while (res.length()<32) res.insert(0, '0');
+        System.out.println(res.toString());
     }
 
     public static void main(String[] args) {
@@ -109,9 +190,20 @@ public class Block56 {
         sameVowelGroup(words);
         ////////////////////////////////////////
         Scanner sc6  = new Scanner(System.in);
-        System.out.println("Введите номер карты:");
+        System.out.println("Задание 6. Введите номер карты:");
         String code = sc6.next();
         validateCard(code);
+        ////////////////////////////////////////
+        Scanner sc7  = new Scanner(System.in);
+        System.out.println("Задание 7. Введите число:");
+        int n = sc7.nextInt();
+        numToEng(n);
+        numToRus(n);
+        ////////////////////////////////////////
+        Scanner sc8  = new Scanner(System.in);
+        System.out.println("Задание 8. Возвращение безопасного хэша, введите строку:");
+        String hash = sc8.next();
+        getSha256Hash(hash);
     }
 
 }
