@@ -181,6 +181,37 @@ public class Block56 {
         }
     }
 
+    public static void hexLattice(int n)
+    {
+        int s=1;
+        //центрированное гексагональное число можно рассчитать по формуле 3n(n—1)+1
+        while (true) {
+            if (3*s*(s-1)+1!=n) break;
+            if (3*s*(s-1)+1>n) System.out.println("Invalid");
+            s++;
+        }
+        int lines=s*2-1;
+        StringBuilder res = new StringBuilder();
+        for (int line=0; line<lines/2; line++)
+        {
+            String newL="";
+            for (int i=0; i<s-line; i++) newL+=" ";
+            for (int i=0; i<s+line; i++) newL+="o ";
+            for (int i = 0; i < s-line-1; i++) newL+=" ";
+            newL+="\n";
+            res.append(newL);
+        }
+        for (int line=lines/2; line<lines; line++)
+        {
+            String newL="";
+            for (int i=0; i<s-(lines-line)+1; i++) newL+=" ";
+            for (int i=0; i<s+(lines-line)-1; i++) newL+="o ";
+            for (int i=0; i<s-(lines-line); i++) newL+=" ";
+            newL+="\n";
+            res.append(newL);
+        }
+        System.out.println(res);
+    }
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
 
@@ -225,6 +256,12 @@ public class Block56 {
         System.out.println("Введите титул из Игры Престолов:");
         String title = sc9.nextLine();
         correctTitle(title);
+        ////////////////////////////////////////
+        Scanner sc10 = new Scanner(System.in);
+        System.out.println("Задание 10. Центрированное шестиугольное число.");
+        System.out.println("Введите число:");
+        int hex = sc10.nextInt();
+        hexLattice(hex);
     }
 
 }
