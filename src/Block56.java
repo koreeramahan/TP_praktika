@@ -8,6 +8,82 @@ import java.math.BigInteger;
 
 public class Block56 {
 
+    public static void encrypt(String str)
+    {
+        String res = "";
+        char first = str.charAt(0);
+        res+=(int)first;
+        res+=" ";
+        for (int i=1; i<str.length(); i++)
+        {
+            char next=str.charAt(i);
+            res+=(int)next-first;
+            res+=" ";
+            first=next;
+        }
+        System.out.println(res);
+    }
+
+    public static void decrypt(String str)
+    {
+        String res = "";
+        String[] code = str.split(" ");
+        int letter=Integer.parseInt(code[0]);
+        res+=(char)letter;
+        for (int i=1; i<code.length; i++)
+        {
+            letter+=Integer.parseInt(code[i]);
+            res+=(char)(letter);
+        }
+        System.out.println(res);
+    }
+
+    public static void canMove(String f, String p, String d)
+    {
+        boolean res = false;
+        char startLetter = p.charAt(0);
+        int startNumber = Integer.parseInt(String.valueOf(p.charAt(1)));
+        char finLetter = d.charAt(0);
+        int finNumber = Integer.parseInt(String.valueOf(d.charAt(1)));
+        if (startLetter == finLetter && startNumber == finNumber) res=false;
+        switch (f){
+            //одну вперед
+            case "Pawn":
+            {
+                if (startLetter==finLetter && startNumber==2 && finNumber==4) res=true;
+                if (startLetter==finLetter && startNumber==(finNumber-1)) res=true;
+            }
+            //сначала два, потом один, буквой г
+            case "Knight":
+            {
+                if ((Math.abs(startLetter-finLetter)==2 && Math.abs(startNumber-finNumber)==1)
+                        ||(Math.abs(startLetter-finLetter)==1 && Math.abs(startNumber-finNumber)==2)) res=true;
+            }
+            //по диагонали, буквы и цифры одинаковые
+            case "Bishop":
+            {
+                if (Math.abs(startLetter-finLetter)==Math.abs(startNumber-finNumber)) res=true;
+            }
+            //либо одинаковые цифры, либо буквы
+            case "Rook":
+            {
+                if ((startLetter==finLetter && startNumber!=finNumber) || (startLetter!=finLetter && startNumber==finNumber)) res=true;
+            }
+            //слон плюс ладья
+            case "Queen":
+            {
+                if ((startLetter==finLetter && startNumber!=finNumber) || (startLetter!=finLetter && startNumber==finNumber)) res=true;
+                if (Math.abs(startLetter-finLetter)==Math.abs(startNumber-finNumber)) res=true;
+            }
+            //вокруг себя в радиусе 1
+            case "King":
+            {
+                if (Math.abs(startLetter-finLetter)<2 && Math.abs(startNumber-finNumber)<2) res=true;
+            }
+        }
+        System.out.println(res);
+    }
+
     public static void canComplete(String not, String full)
     {
         int j = 0;
@@ -177,44 +253,29 @@ public class Block56 {
                 String newW=w[i].substring(0,1).toUpperCase()+w[i].substring(1);
                 w[i]=newW;
             }
-            System.out.println(String.join(" ", w));
         }
+        System.out.println(String.join(" ", w));
     }
 
     public static void hexLattice(int n)
     {
-        int s=1;
-        //центрированное гексагональное число можно рассчитать по формуле 3n(n—1)+1
-        while (true) {
-            if (3*s*(s-1)+1!=n) break;
-            if (3*s*(s-1)+1>n) System.out.println("Invalid");
-            s++;
-        }
-        int lines=s*2-1;
-        StringBuilder res = new StringBuilder();
-        for (int line=0; line<lines/2; line++)
-        {
-            String newL="";
-            for (int i=0; i<s-line; i++) newL+=" ";
-            for (int i=0; i<s+line; i++) newL+="o ";
-            for (int i = 0; i < s-line-1; i++) newL+=" ";
-            newL+="\n";
-            res.append(newL);
-        }
-        for (int line=lines/2; line<lines; line++)
-        {
-            String newL="";
-            for (int i=0; i<s-(lines-line)+1; i++) newL+=" ";
-            for (int i=0; i<s+(lines-line)-1; i++) newL+="o ";
-            for (int i=0; i<s-(lines-line); i++) newL+=" ";
-            newL+="\n";
-            res.append(newL);
-        }
-        System.out.println(res);
+        
     }
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
-
+        Scanner sc1 = new Scanner(System.in);
+        System.out.println("Задание 1. Введите сообщение:");
+        String str = sc1.nextLine();
+        if (str.charAt(0) >= '0' && str.charAt(0) <= '9') decrypt(str);
+        else encrypt(str);
+        ///////////////////////////////////////
+        Scanner sc2 = new Scanner(System.in);
+        System.out.println("Задание 2. Введите фигуру, ее позицию и цель: ");
+        String f = sc2.next();
+        String p = sc2.next();
+        String d = sc2.next();
+        canMove(f,p,d);
+        ///////////////////////////////////////
         Scanner sc3 = new Scanner(System.in);
         System.out.println("Задание 3. Может ли быть завершена входная строка");
         System.out.println("Введите две строки:");
